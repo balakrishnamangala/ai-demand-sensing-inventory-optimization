@@ -1,0 +1,39 @@
+prophet:
+  seasonality:
+    yearly: true
+    weekly: true
+    daily: false
+  holidays_country: "US"
+  changepoint_prior_scale: 0.05
+  seasonality_prior_scale: 10
+  interval_width: 0.95
+
+xgboost:
+  n_estimators: 500
+  max_depth: 6
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  min_child_weight: 5
+  reg_alpha: 0.1
+  reg_lambda: 1.0
+  early_stopping_rounds: 50
+
+ensemble:
+  method: "weighted_average"
+  prophet_weight: 0.4
+  xgboost_weight: 0.6
+  dynamic_weighting: true
+  cv_folds: 5
+
+training:
+  test_size_weeks: 12
+  validation_size_weeks: 8
+  retrain_frequency: "weekly"
+  min_samples: 52
+  target_column: "quantity_sold"
+
+metrics:
+  primary: "mape"
+  secondary: ["rmse", "mae", "bias"]
+  baseline: "moving_average_4w"

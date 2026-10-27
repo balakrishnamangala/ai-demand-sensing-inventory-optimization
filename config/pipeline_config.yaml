@@ -1,0 +1,28 @@
+data_sources:
+  sales:
+    path: "data/raw/sales_history.parquet"
+    date_column: "transaction_date"
+    lookback_years: 3
+  promotions:
+    path: "data/raw/promotions.parquet"
+    date_column: "promo_start_date"
+  weather:
+    path: "data/external/weather_daily.parquet"
+    date_column: "date"
+    stations: ["KORD", "KJFK", "KLAX", "KIAH", "KATL"]
+  macro:
+    path: "data/external/macro_indicators.csv"
+    date_column: "period"
+
+processing:
+  frequency: "weekly"
+  aggregation_level: "sku_location"
+  min_history_weeks: 26
+  outlier_method: "iqr"
+  outlier_threshold: 3.0
+  fill_method: "interpolate"
+
+output:
+  processed_path: "data/processed/"
+  format: "parquet"
+  partition_by: ["category", "region"]

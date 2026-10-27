@@ -1,0 +1,36 @@
+inventory:
+  service_level_target: 0.98
+  review_period_days: 7
+  lead_time_days:
+    dc: 14
+    store: 3
+  holding_cost_pct: 0.25
+  stockout_cost_multiplier: 3.0
+
+safety_stock:
+  method: "dynamic"
+  z_score_target: 2.054
+  demand_variability_window: 12
+  lead_time_variability: true
+  min_safety_stock_days: 3
+  max_safety_stock_days: 45
+
+reorder_point:
+  method: "probabilistic"
+  include_pipeline_stock: true
+  include_in_transit: true
+
+abc_xyz:
+  abc_thresholds: [0.80, 0.95]
+  xyz_cv_thresholds: [0.5, 1.0]
+
+multi_echelon:
+  tiers: ["dc", "regional", "store"]
+  allocation_method: "proportional"
+  rebalance_frequency: "weekly"
+  transfer_cost_per_unit: 2.50
+
+backtest:
+  horizon_weeks: 12
+  rolling_window: true
+  metrics: ["fill_rate", "service_level", "working_capital", "turns"]
