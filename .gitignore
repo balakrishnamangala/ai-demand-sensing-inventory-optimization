@@ -8,6 +8,7 @@ venv/
 .env
 *.parquet
 *.csv
+!data/raw/sample_*.csv
 !config/*.csv
 data/raw/*
 data/processed/*
