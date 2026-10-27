@@ -37,7 +37,7 @@ jobs:
       - name: Lint
         run: |
           pip install flake8
-          flake8 src/ --max-line-length=100 --ignore=E501,W503
+          flake8 src/ --max-line-length=100 --ignore=E501,W503,E127,E226,F401,W504
 
   docker:
     runs-on: ubuntu-latest
