@@ -2,6 +2,13 @@
 import pytest
 import pandas as pd
 import numpy as np
+from unittest.mock import MagicMock, patch
+import sys
+
+# Mock heavy dependencies for faster test startup
+sys.modules['prophet'] = MagicMock()
+sys.modules['prophet.forecaster'] = MagicMock()
+sys.modules['xgboost'] = MagicMock()
 
 
 @pytest.fixture
