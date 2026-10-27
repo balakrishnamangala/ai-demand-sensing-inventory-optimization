@@ -1,4 +1,5 @@
 """Reorder point and economic order quantity calculations."""
+from typing import Optional
 import numpy as np
 import pandas as pd
 
@@ -75,6 +76,3 @@ class ReorderPointCalculator:
         logger.info(f"Reorder points calculated for {len(df)} SKUs, "
                     f"total investment=${df['inventory_investment'].sum():,.0f}")
         return df
-
-
-from typing import Optional

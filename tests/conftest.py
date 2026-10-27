@@ -5,10 +5,19 @@ import numpy as np
 from unittest.mock import MagicMock, patch
 import sys
 
-# Mock heavy dependencies for faster test startup
-sys.modules['prophet'] = MagicMock()
-sys.modules['prophet.forecaster'] = MagicMock()
-sys.modules['xgboost'] = MagicMock()
+# Mock heavy dependencies that require compilation or system libraries
+for mod in [
+    'prophet', 'prophet.forecaster', 'prophet.serialize',
+    'xgboost', 'xgboost.core', 'xgboost.sklearn',
+    'pyodbc',
+    'azure', 'azure.storage', 'azure.storage.blob', 'azure.identity',
+    'loguru', 'loguru._logger',
+    'cmdstanpy',
+]:
+    sys.modules.setdefault(mod, MagicMock())
+
+# Ensure loguru mock has a usable logger attribute
+sys.modules['loguru'].logger = MagicMock()
 
 
 @pytest.fixture
